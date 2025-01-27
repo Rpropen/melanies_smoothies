@@ -36,7 +36,10 @@ if ingredients_list:
     
     for f in ingredients_list:
         ingredients_str += f + ' '
-    
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        # st.text(smoothiefroot_response.json())
+        sf_df = st.dataframe(smoothiefroot_response.json(), use_container_width=True)
+        
     #st.write(ingredients_str)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
@@ -49,6 +52,4 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered, ' + name_on_order + '!', icon="✅")
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(smoothiefroot_response.json(), use_container_width=True)
+
