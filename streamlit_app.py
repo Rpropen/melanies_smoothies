@@ -28,19 +28,16 @@ pd_df = my_dataframe.to_pandas()
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:',
     my_dataframe,
-    max_selections = 6
+    max_selections = 5
 )
 
 if ingredients_list:
-    #st.write(ingredients_list)
-    #st.text(ingredients_list)
-    
     ingredients_str = ''
     
     for f in ingredients_list:
         ingredients_str += f + ' '
         
-        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == f, 'SEARCH_ON'].iloc[0]
+        search_on = pd_df.loc[pd_df['FRUIT_NAME'] == f, 'SEARCH_ON'].iloc[0]
         st.write('The search value for ', f,' is ', search_on, '.')
         
         st.subheader(f + ' Nutration Information')
